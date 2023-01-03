@@ -37,6 +37,14 @@ const organizations = [
 // We want to put position name and its organization name together, using the orgId relationship
 // Bonus point if you think about the time complexity, a fast solution, these arrays can be huge (thousands of elements maybe!)
 // SOLUTION:
+const positionsWithOrgNames = positions.map((position) => {
+  const org = organizations.find(org => org.id === position.orgId);
+
+  return {
+    orgName: org.name,
+    name: position.name
+  };
+});
 
 
 
