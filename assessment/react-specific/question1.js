@@ -12,9 +12,67 @@
 
 // SOLUTION:
 // React and ReactDOM is already imported in index.html
+import React, { useState, useEffect } from 'react';
+
 function App() {
+  const [data, setData] = useState([]);
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    async function fetchData() {
+      setLoading(true);
+      const response = await fetch(`https://jsonplaceholder.typicode.com/todos?_start=${(page - 1) * 10}&_limit=10`);
+      const data = await response.json();
+      setData(data);
+      setLoading(false);
+    }
+    fetchData();
+  }, [page]);
+
+  function handlePreviousClick() {
+    if (page > 1) {
+      setPage(page - 1);
+    }
+  }
+  
+  function handleNextClick() {
+    setPage(page + 1);
+  }
+
   return (
-    <p>Hello from question1!</p>
+    <div className='table-container'>
+      <table>
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>User ID</th>
+            <th>Title</th>
+            <th>Completed</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map(data => (
+            <tr key={todo.id}>
+              <td>{todo.id}</td>
+              <td>{todo.userId}</td>
+              <td>{todo.title}</td>
+              <td>{todo.completed ? 'Yes' : 'No'}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      {loading ? (
+        <div>Loading...</div>
+      ) : (
+        <div>
+          <button className='pagination-button' onClick={handlePreviousClick} disabled={page === 1}>
+            Previous
+          </button>
+          <button className='pagination-button' onClick={handleNextClick}>Next</button>
+        </div>
+      )}
+    </div>
   );
 }
 
