@@ -9,3 +9,12 @@
 // Hint: google 'debouncing'
 
 // SOLUTION:
+const input = document.querySelector('#a_text');
+let timer;
+
+input.addEventListener('input', () => {
+  clearTimeout(timer);
+  timer = setTimeout(() => {
+    console.log(input.value);
+  }, 500);
+});
