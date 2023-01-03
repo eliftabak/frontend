@@ -8,10 +8,18 @@ function doExpensiveTask(input) {
 }
 
 function optimizeFunction(func) {
-  // You shouldn't need to edit anywhere else
-  // Do your work inside this function
-  // SOLUTION:
+  const cache = {};
 
+  return function(input) {
+    if (input in cache) {
+      console.log(`Same input, no need to calculate: ${cache[input]}`);
+      return cache[input];
+    }
+
+    const result = func(input);
+    cache[input] = result;
+    return result;
+  };
 }
 
 // anOptimizedFunc shouldn't execute the expensive task if new input is same as the previous one
