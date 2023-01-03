@@ -1,7 +1,49 @@
 /* just to be able to see the div, this is your starting point*/
 /* You can create your own classess, animations etc*/
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes upToDown {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-200px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
 #to-be-animated {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -100px;
   width: 200px;
   height: 200px;
   background-color: red;
+  transition: all 1s ease-in-out;
+}
+
+.rotate {
+  animation: rotate 1s ease-in-out;
+}
+
+.move-up-down {
+  animation: upToDown 1s ease-in-out;
+}
+
+#rotate-button {
+  cursor: pointer;
+}
+
+#up-down-button {
+  cursor: pointer;
 }
